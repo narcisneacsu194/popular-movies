@@ -10,8 +10,6 @@ public final class JsonUtils {
     public static Movie[] createMovieArrayFromJsonResponse(String jsonResponse) throws JSONException{
         JSONObject object = new JSONObject(jsonResponse);
 
-        if(object == null)return null;
-
         JSONArray movieArray = object.getJSONArray("results");
 
         Movie[] movies = new Movie[movieArray.length()];

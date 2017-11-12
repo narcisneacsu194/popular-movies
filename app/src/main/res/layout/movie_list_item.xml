@@ -4,6 +4,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
+        android:contentDescription="@string/content_description_main_activity_image"
         android:id="@+id/iv_movie_poster"
         android:layout_width="250dp"
         android:layout_height="250dp"

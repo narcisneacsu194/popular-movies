@@ -13,8 +13,8 @@ import com.squareup.picasso.Picasso;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapterViewHolder>{
     private Movie[] mMovieData;
-    private Context mContext;
-    private MovieAdapterOnClickHandler movieAdapterOnClickHandler;
+    private final Context mContext;
+    private final MovieAdapterOnClickHandler movieAdapterOnClickHandler;
 
     public MovieAdapter(Context context, MovieAdapterOnClickHandler movieAdapterOnClickHandler){
         mContext = context;
@@ -30,8 +30,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
         Context context = parent.getContext();
         int movieLayoutId = R.layout.movie_list_item;
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        boolean attachImmediatelyToParent = false;
-        View view = layoutInflater.inflate(movieLayoutId, parent, attachImmediatelyToParent);
+        View view = layoutInflater.inflate(movieLayoutId, parent, false);
 
         return new MovieAdapterViewHolder(view);
     }
@@ -55,7 +54,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
         public MovieAdapterViewHolder(View view){
             super(view);
 
-            mImageView = (ImageView) view.findViewById(R.id.iv_movie_poster);
+            mImageView = view.findViewById(R.id.iv_movie_poster);
             view.setOnClickListener(this);
         }
 

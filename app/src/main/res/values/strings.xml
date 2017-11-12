@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">popular-movies</string>
+    <string name="content_description_detail_activity_image">This is the image displayed in the detail activity.</string>
+    <string name="content_description_main_activity_image">This is an image displayed for each movie entry from the main activity.</string>
+    <string name="popularity">Popularity</string>
+    <string name="rating">Rating</string>
+    <string name="movie_title">Title: %1$s</string>
+    <string name="movie_description">Description: %1$s</string>
+    <string name="movie_release_date">Release Date: %1$s</string>
+    <string name="movie_voter_average">Voter Average: %1$s</string>
 </resources>

@@ -10,28 +10,29 @@ import com.company.android.popular_movies.utils.ImageUtils;
 import com.squareup.picasso.Picasso;
 
 public class DetailActivity extends AppCompatActivity {
-    private String originalTitleString;
-    private String posterPathString;
-    private String overviewString;
-    private Double voteAverageDouble;
-    private String releaseDateString;
-
-    private ImageView imageView;
-    private TextView originalTitleTextView;
-    private TextView overviewTextView;
-    private TextView voteAverageTextView;
-    private TextView releaseDateTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String originalTitleString;
+        String posterPathString;
+        String overviewString;
+        Double voteAverageDouble;
+        String releaseDateString;
+
+        ImageView imageView;
+        TextView originalTitleTextView;
+        TextView overviewTextView;
+        TextView voteAverageTextView;
+        TextView releaseDateTextView;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        imageView = (ImageView) findViewById(R.id.iv_detail_movie_poster);
-        originalTitleTextView = (TextView) findViewById(R.id.tv_original_title);
-        overviewTextView = (TextView) findViewById(R.id.tv_overview);
-        voteAverageTextView = (TextView) findViewById(R.id.tv_vote_average);
-        releaseDateTextView = (TextView) findViewById(R.id.tv_release_date);
+        imageView =  findViewById(R.id.iv_detail_movie_poster);
+        originalTitleTextView = findViewById(R.id.tv_original_title);
+        overviewTextView = findViewById(R.id.tv_overview);
+        voteAverageTextView = findViewById(R.id.tv_vote_average);
+        releaseDateTextView = findViewById(R.id.tv_release_date);
 
         Intent intent = getIntent();
 
@@ -51,10 +52,10 @@ public class DetailActivity extends AppCompatActivity {
                 posterPathString = ImageUtils.buildImageUrl(posterPathString);
 
                 Picasso.with(this).load(posterPathString).into(imageView);
-                originalTitleTextView.setText("Title: " + originalTitleString);
-                overviewTextView.setText("Description: " + overviewString);
-                releaseDateTextView.setText("Release Date: " + releaseDateString);
-                voteAverageTextView.setText("Voter Average: " + Double.toString(voteAverageDouble));
+                originalTitleTextView.setText(getString(R.string.movie_title, originalTitleString));
+                overviewTextView.setText(getString(R.string.movie_description, overviewString));
+                releaseDateTextView.setText(getString(R.string.movie_release_date, releaseDateString));
+                voteAverageTextView.setText(getString(R.string.movie_voter_average, Double.toString(voteAverageDouble)));
             }
         }
     }

@@ -8,7 +8,6 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,8 +33,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
         GridLayoutManager gridLayoutManager =
                 new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
-//        LinearLayoutManager linearLayoutManager =
-//                new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(gridLayoutManager);
         mRecyclerView.setHasFixedSize(true);
 
@@ -54,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         boolean isConnectivity = activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
         if(isConnectivity)
-        new FetchMoviesTask().execute(criteria);
+        new FetchMoviesTask(new FetchMyDataCompleteListener()).execute(criteria);
     }
 
     @Override
@@ -72,31 +69,13 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         startActivity(intent);
     }
 
-    public class FetchMoviesTask extends AsyncTask<String, Void, Movie[]>{
-        @Override
-        protected Movie[] doInBackground(String... strings) {
-            String sortOption = strings[0];
-            URL url;
-            if(sortOption.equals("popularity")){
-                url = NetworkUtils.buildURL("popularity");
-            }else{
-                url = NetworkUtils.buildURL("rating");
-            }
-            String jsonResponse;
-            Movie[] movies;
-            try {
-                jsonResponse = NetworkUtils.getResponseFromHttpUrl(url);
-                movies = JsonUtils.createMovieArrayFromJsonResponse(jsonResponse);
-                return movies;
-            }catch(Exception e){
-                e.printStackTrace();
-                return null;
-            }
+    public interface AsyncTaskCompleteListener<T>{
+        public void onTaskComplete(T result);
+    }
 
-        }
-
+    public class FetchMyDataCompleteListener implements AsyncTaskCompleteListener<Movie[]>{
         @Override
-        protected void onPostExecute(Movie[] movies) {
+        public void onTaskComplete(Movie[] movies) {
             mRecyclerView.setVisibility(View.VISIBLE);
             mMovieAdapter.setMovieData(movies);
         }

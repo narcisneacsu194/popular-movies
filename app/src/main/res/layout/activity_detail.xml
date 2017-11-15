@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="8dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
 
     <ImageView
         android:contentDescription="@string/content_description_detail_activity_image"
@@ -16,23 +17,27 @@
         android:id="@+id/tv_original_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"/>
+        android:padding="10dp"
+        android:textColor="@color/colorWhite"/>
 
     <TextView
         android:id="@+id/tv_overview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"/>
+        android:padding="10dp"
+        android:textColor="@color/colorWhite"/>
 
     <TextView
         android:id="@+id/tv_vote_average"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"/>
+        android:padding="10dp"
+        android:textColor="@color/colorWhite"/>
 
     <TextView
         android:id="@+id/tv_release_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"/>
+        android:padding="10dp"
+        android:textColor="@color/colorWhite"/>
 </LinearLayout>

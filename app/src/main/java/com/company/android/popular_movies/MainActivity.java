@@ -2,6 +2,8 @@ package com.company.android.popular_movies;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -42,7 +44,17 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
         mRecyclerView.setVisibility(View.VISIBLE);
 
-        new FetchMoviesTask().execute("popularity");
+        apiRequest("popularity");
+    }
+
+    private void apiRequest(String criteria) {
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
+        boolean isConnectivity = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+        if(isConnectivity)
+        new FetchMoviesTask().execute(criteria);
     }
 
     @Override
@@ -102,12 +114,12 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         int itemId = item.getItemId();
 
         if(itemId == R.id.action_popularity){
-            new FetchMoviesTask().execute("popularity");
+            apiRequest("popularity");
             return true;
         }
 
         if(itemId == R.id.action_rating){
-            new FetchMoviesTask().execute("rating");
+            apiRequest("rating");
             return true;
         }
 
